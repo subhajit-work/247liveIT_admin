@@ -1,0 +1,76 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-info float-right" routerLink="/addPackage">Add New Package</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Subscription Packages</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 200px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search" [(ngModel)]="searchKey">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-default" (click)="SearchPackages()">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Sr.</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <!-- <th>Sub Category</th> -->
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let package of packages | paginate: { itemsPerPage: perPage, currentPage: pageIndex, totalItems: packagesCount }; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{package?.name}}</td>
+                    <td>{{package?.subCategory}}</td>
+                    <!-- <td>{{package?.subCategory}}</td> -->
+                    <td>{{package?.type}}</td>
+                    <td>${{package?.amount}}</td>
+                    <td>{{package?.createdAt | date}}</td>
+                    <td>
+                      <a href="javascript:void(0)" [routerLink]="['/package', package.packageId]"><i class="fas fa-edit text-info"></i></a>
+                      <a href="javascript:void(0)">
+                        <i *ngIf="package.status == 1" (click)="ChangePackageStatus(package.packageId, package.stripePlanId, 2)" title="Inactive Package" class="fas fa-times-circle ml-3 text-danger"></i>
+                        <i *ngIf="package.status == 2" (click)="ChangePackageStatus(package.packageId, package.stripePlanId, 1)" title="Active Package" class="fas fa-check-circle ml-3 text-success"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="packages.length == 0">
+                <p class="text-center">Packages list not found</p>
+              </div>
+            </div>
+            <div class="custom_pagination mt-4" *ngIf="packages?.length > 0">
+              <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

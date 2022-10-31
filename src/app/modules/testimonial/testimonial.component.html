@@ -1,0 +1,70 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-info float-right" routerLink="/addTestimonial">Add New Testimonial</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Testimonials</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 200px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search" [(ngModel)]="searchKey">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-default" (click)="SearchTestimonials()">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Sr.</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let testimonial of testimonials | paginate: { itemsPerPage: perPage, currentPage: pageIndex, totalItems: testimonialsCount }; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{testimonial?.image}}</td>
+                    <td>{{testimonial?.name}}</td>
+                    <td>{{testimonial?.createdAt | date}}</td>
+                    <td>
+                      <a href="javascript:void(0)" [routerLink]="['/testimonial', testimonial.testimonialId]"><i class="fas fa-edit text-info"></i></a>
+                      <a href="javascript:void(0)">
+                        <i *ngIf="testimonial.status == 1" (click)="ChangeTestimonialStatus(testimonial.testimonialId, 2)" title="Inactive Testimonial" class="fas fa-times-circle ml-3 text-danger"></i>
+                        <i *ngIf="testimonial.status == 2" (click)="ChangeTestimonialStatus(testimonial.testimonialId, 1)" title="Active Testimonial" class="fas fa-check-circle ml-3 text-success"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="testimonials.length == 0">
+                <p class="text-center">Testimonials list not found</p>
+              </div>
+            </div>
+            <div class="custom_pagination mt-4" *ngIf="testimonials?.length > 0">
+              <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

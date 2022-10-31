@@ -1,0 +1,74 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <button type="button" class="btn btn-info float-right" routerLink="/addBlog">Add Blog</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Blogs</h3>
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 200px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search" [(ngModel)]="searchKey">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-default" (click)="SearchBlogs()">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Sr.</th>
+                      <th>Image</th>
+                      <th>Tittle</th>
+                      <th>Created At</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let blog of blogs | paginate: { itemsPerPage: perPage, currentPage: pageIndex, totalItems: blogsCount }; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>
+                        <img width="100" *ngIf="blog?.image" src="{{blog?.image}}">
+                        <img width="100" *ngIf="!blog?.image" src="assets/noImage.png">
+                      </td>
+                      <td>{{blog?.title}}</td>
+                      <td>{{blog?.createdAt | date}}</td>
+                      <td>
+                        <a title="Edit Blog" href="javascript:void(0)" [routerLink]="['/blog', blog.id]"><i class="fas fa-edit text-info"></i></a>
+                        <a href="javascript:void(0)">
+                          <i *ngIf="blog.status == 1" (click)="ChangeBlogStatus(blog.id, 2)" title="Inactive Blog" class="fas fa-times-circle ml-3 text-danger"></i>
+                          <i *ngIf="blog.status == 2" (click)="ChangeBlogStatus(blog.id, 1)" title="Active Blog" class="fas fa-check-circle ml-3 text-success"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="blogs.length == 0">
+                  <p class="text-center">Blogs list not found</p>
+                </div>
+              </div>
+              <div class="custom_pagination mt-4" *ngIf="blogs?.length > 0">
+                <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

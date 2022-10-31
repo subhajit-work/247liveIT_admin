@@ -1,0 +1,101 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Users</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 200px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search" [(ngModel)]="searchKey">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-default" (click)="SearchUsers()">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Sr.</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let user of users | paginate: { itemsPerPage: perPage, currentPage: pageIndex, totalItems: usersCount }; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{user?.email}}</td>
+                    <td>{{user?.createdAt | date}}</td>
+                    <td>
+                      <a href="javascript:void(0)" title="User Data" [routerLink]="['/edit-user', user.userId]"><i class="fas fa-edit text-info"></i></a>
+                      <a href="javascript:void(0)">
+                        <i *ngIf="user.status == 1" (click)="ChangeUserStatus(user.userId, 2)" title="Inactive User" class="fas fa-user-slash ml-3 text-danger"></i>
+                        <i *ngIf="user.status == 2" (click)="ChangeUserStatus(user.userId, 1)" title="Active User" class="fas fa-user ml-3 text-success"></i>
+                      </a>
+                      <a href="javascript:void(0)" title="View Plans" [routerLink]="['/user', user.userId]"><i class="fas fa-eye text-info ml-3 "></i></a>
+                      <a href="javascript:void(0)" (click)="changeUserPassword(user?.userId)" title="Change Password" data-toggle="modal" data-target="#forgotPwdModal"><i class="fas fa-key text-success ml-3 "></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="users.length == 0">
+                <p class="text-center">Users list not found</p>
+              </div>
+            </div>
+            <div class="custom_pagination mt-4" *ngIf="users?.length > 0">
+              <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<div class="modal fade" id="forgotPwdModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+      </div>
+      <div class="modal-body text-center">
+        <i class="fas fa-lock fa-7x"></i>
+        <p>You can reset user password here</p>
+        <form [formGroup]="ForgotPasswordForm" novalidate>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Password" formControlName="password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-key"></span>
+                </div>
+              </div>
+            </div>
+            <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isForgotPasswordSubmit && ForgotPasswordForm.controls.email.hasError('required')">Kindly enter an password</span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeForgotPasswordModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="ForgotPassword(ForgotPasswordForm.value)">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

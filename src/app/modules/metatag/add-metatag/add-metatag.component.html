@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-6">
+            <!-- <h1>General Form</h1> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Metatag</h3>
+              </div>
+              <div class="card-body">
+                <form [formGroup]="MetatagForm" novalidate>
+                  <div class="col-sm-6 col-lg-6">
+                    <div class="form-group">
+                      <label>Position</label>
+                      <select class="custom-select" formControlName="position" >
+                        <option [value]="1">Header</option>
+                        <option [value]="2">Footer</option>
+                      </select>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isMetatagSubmit && MetatagForm.controls.position.hasError('required')">Kindly select category</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6  col-lg-6">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="custom-select" formControlName="type" >
+                        <option [value]="1">Blog</option>
+                        <option [value]="2">Common</option>
+                      </select>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isMetatagSubmit && MetatagForm.controls.type.hasError('required')">Kindly select category</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Tag</label>
+                        <textarea type="text" rows="5" class="form-control" placeholder="Tag" formControlName="tags"></textarea>
+                        <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isMetatagSubmit && MetatagForm.controls.tags.hasError('required')">Tag is Required</span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary" (click)="AddMetatag(MetatagForm.value)">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="modal fade" id="cropImageModal" tabindex="-1" role="dialog" aria-labelledby="crop_image" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Crop Image</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="250" format="png" (imageCropped)="imageCropped($event)"></image-cropper>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ClearImage()">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>

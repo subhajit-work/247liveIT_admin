@@ -1,0 +1,119 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-6">
+            <!-- <h1>General Form</h1> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+                <form [formGroup]="PackageForm" novalidate class="card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Google Analytics Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Account</label>
+                                <input type="text" class="form-control" placeholder="Google Analytics Account" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                            </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Properties</label>
+                                <input type="text" class="form-control" placeholder="Google Analytics Properties" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>View ID</label>
+                                <input type="text" class="form-control" placeholder="Google Analytics View ID" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Google Ad's Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Client</label>
+                                <input type="text" class="form-control" placeholder="Google Ad's Client" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                            </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Customer Id</label>
+                                <input type="text" class="form-control" placeholder="Google Ad's Customer Id" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Facebook Account Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>App ID</label>
+                                <input type="text" class="form-control" placeholder="Facebook App ID" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                            </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>App Secret</label>
+                                <input type="text" class="form-control" placeholder="Facebook App Secret" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Access Token</label>
+                                <input type="text" class="form-control" placeholder="Facebook Access Token" formControlName="name">
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary" (click)="AddPackage(PackageForm.value)">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>

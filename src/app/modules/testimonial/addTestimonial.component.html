@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+          <!-- <h1>General Form</h1> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Testimonial</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="TestimonialForm" novalidate>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Image</label><br />
+                      <input type="file" accept="image/x-png,image/jpeg" (change)="fileChangeEvent($event)" formControlName="image">
+                      <div style="margin-top: 10px;"><img [src]="croppedImage" id="img-btn4" width="100px" height="100px" alt="" class="img-fluid profile_img"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>User Name</label>
+                      <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isTestimonialSubmit && TestimonialForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isTestimonialSubmit && TestimonialForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea type="text" rows="5" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isTestimonialSubmit && TestimonialForm.controls.description.hasError('required')">Description is Required</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-primary" (click)="AddTestimonial(TestimonialForm.value)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal fade" id="cropImageModal" tabindex="-1" role="dialog" aria-labelledby="crop_image" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crop Image</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="250" format="png" (imageCropped)="imageCropped($event)"></image-cropper>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ClearImage()">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

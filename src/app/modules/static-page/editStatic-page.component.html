@@ -1,0 +1,54 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Edit Static Page</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="StaticPageForm" novalidate>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Page Type</label>
+                      <input type="text" class="form-control rounded-0" formControlName="pageType">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Content</label>
+                      <ckeditor
+                        #editor
+                        formControlName="content"
+                        id="content"
+                        name="content"
+                        type="divarea">
+                      </ckeditor>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isStaticPageSubmit && StaticPageForm.controls.content.hasError('required')">Kindly enter contents</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-primary" (click)="EditStaticPage(StaticPageForm.value)">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,86 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+          <!-- <h1>General Form</h1> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Discount Coupon</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="CouponForm" novalidate>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.name.hasError('required')">Kindly enter Name</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Coupon Type</label>
+                      <select class="custom-select" formControlName="type">
+                        <option *ngFor="let couponType of couponTypes" [value]="couponType.id">{{couponType.text}}</option>
+                      </select>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.type.hasError('required')">Kindly select Coupon Type</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Value</label>
+                      <div class="input-group">
+                          <div class="input-group-prepend" *ngIf="CouponForm.get('type').value == 1">
+                              <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                          </div>
+                          <input type="number" min="1" class="form-control" placeholder="Value" formControlName="value">
+                          <div class="input-group-append" *ngIf="CouponForm.get('type').value == 2">
+                            <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                          </div>
+                      </div>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.value.hasError('required')">Kindly enter Amount</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.value.hasError('min')">Kindly enter valid value</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.value.hasError('max')">Value should be upto 100</span>
+                  </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Expired Date</label>
+                      <input type="text" class="form-control time" placeholder="- Select Date -" id="datetimepicker2" formControlName="expiredDate" readonly>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.expiredDate.hasError('required')">Kindly enter Expired Date</span>
+                  </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea type="text" rows="5" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isCouponSubmit && CouponForm.controls.description.hasError('required')">Description is Required</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-primary" (click)="AddCoupon(CouponForm.value)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

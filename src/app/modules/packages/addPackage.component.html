@@ -1,0 +1,140 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+          <!-- <h1>General Form</h1> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Subscription Package</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="PackageForm" novalidate>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('required')">Kindly enter Name</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('minlength')">Kindly enter Name</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.name.hasError('maxlength')">Name should be upto 50 characters</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Category</label>
+                      <select class="custom-select" formControlName="category" (change)="onCategoryChange($event)">
+                        <option *ngFor="let category of allCategories" [value]="category.packageCategoryId">{{category.name}}</option>
+                      </select>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.category.hasError('required')">Kindly select category</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Sub Category</label>
+                      <select class="custom-select" formControlName="subCategory">
+                        <option *ngFor="let category of subCategories" [value]="category.packageCategoryId">{{category.name}}</option>
+                      </select>
+                      <!-- <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.subCategory.hasError('required')">Kindly select sub category</span> -->
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="custom-select" formControlName="type">
+                        <option *ngFor="let type of types" [value]="type.id">{{type.value}}</option>
+                      </select>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.type.hasError('required')">Kindly select Type</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Duration</label>
+                      <select class="custom-select" formControlName="duration">
+                        <option *ngFor="let duration of durations" [value]="duration.id">{{duration.value}}</option>
+                      </select>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.duration.hasError('required')">Kindly select Duration</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Amount</label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                          </div>
+                          <input type="number" min="1" class="form-control" placeholder="Amount" formControlName="amount">
+                      </div>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.amount.hasError('required')">Kindly enter Amount</span>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.amount.hasError('min')">Kindly enter valid value</span>
+                  </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Included Features</label>
+                      <ul>
+                        <li *ngFor="let includedFeature of includedFeaturesList">
+                          {{includedFeature}}
+                          <span class="close" style="cursor: pointer;" (click)="RemoveFeature(includedFeature, 1)">&times;</span>
+                        </li>
+                      </ul>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control rounded-0" formControlName="includedFeature" >
+                        <span class="input-group-append">
+                          <button type="button" class="btn btn-info btn-flat" (click)="AddIncludedFeature(1)">Add</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Not Included Features</label>
+                      <ul>
+                        <li *ngFor="let notIncludedFeature of notIncludedFeaturesList">
+                          {{notIncludedFeature}}
+                          <span class="close" style="cursor: pointer;" (click)="RemoveFeature(notIncludedFeature, 2)">&times;</span>
+                        </li>
+                      </ul>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control rounded-0" formControlName="notIncludedFeature" >
+                        <span class="input-group-append">
+                          <button type="button" class="btn btn-info btn-flat" (click)="AddIncludedFeature(2)">Add</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea type="text" rows="5" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && PackageForm.controls.description.hasError('required')">Description is Required</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-primary" (click)="AddPackage(PackageForm.value)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

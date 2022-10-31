@@ -1,0 +1,93 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header p-2">
+              <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" (click)="GetUserSubscriptionPlans(1)" href="#activePlans" data-toggle="tab">Active Plans</a></li>
+                <li class="nav-item"><a class="nav-link" (click)="GetUserSubscriptionPlans(2)" href="#planHistory" data-toggle="tab">Plan History</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li> -->
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="active tab-pane" id="activePlans" *ngIf="selectedTab == 1">
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Sr.</th>
+                          <th>Name</th>
+                          <th>Duration</th>
+                          <th>Amount</th>
+                          <th>Subscription Date</th>
+                          <th>Expired Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let plan of subscriptionPlans; let i = index">
+                          <td>{{i+1}}</td>
+                          <td>{{plan?.name}}</td>
+                          <td>{{plan?.duration}}</td>
+                          <td>{{plan?.amount}}</td>
+                          <td>{{plan?.subscriptionDate | date}}</td>
+                          <td>{{plan?.subscriptionExpiredDate | date}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div *ngIf="subscriptionPlans.length == 0">
+                      <p class="text-center">Subscription Plans list not found</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="active tab-pane" id="planHistory" *ngIf="selectedTab == 2">
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Sr.</th>
+                          <th>Name</th>
+                          <th>Duration</th>
+                          <th>Amount</th>
+                          <th>Subscription Date</th>
+                          <th>Expired Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let plan of subscriptionPlans; let i = index">
+                          <td>{{i+1}}</td>
+                          <td>{{plan?.name}}</td>
+                          <td>{{plan?.duration}}</td>
+                          <td>{{plan?.amount}}</td>
+                          <td>{{plan?.subscriptionDate | date}}</td>
+                          <td>{{plan?.subscriptionExpiredDate | date}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div *ngIf="subscriptionPlans.length == 0">
+                      <p class="text-center">Subscription Plans list not found</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

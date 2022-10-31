@@ -1,0 +1,84 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+          <!-- <h1>General Form</h1> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Blog</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="BlogForm" novalidate>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" placeholder="Blog title" formControlName="title">
+                        <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isBlogSubmit && BlogForm.controls.title.hasError('required')">Kindly enter title</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Image</label><br />
+                      <input type="file" accept="image/x-png,image/jpeg" (change)="fileChangeEvent($event)" formControlName="image">
+                      <div *ngIf="croppedImage" style="margin-top: 10px;"><img [src]="croppedImage" id="img-btn4" width="100px" height="100px" alt="" class="img-fluid profile_img"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Description</label>
+                      <ckeditor
+                        #editor
+                        formControlName="description"
+                        id="description"
+                        name="description"
+                        type="divarea">
+                      </ckeditor>
+                      <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isBlogSubmit && BlogForm.controls.description.hasError('required')">Kindly enter descriptions</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-primary" (click)="AddBlog(BlogForm.value)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal fade" id="cropImageModal" tabindex="-1" role="dialog" aria-labelledby="crop_image" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crop Image</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="250" format="png" (imageCropped)="imageCropped($event)"></image-cropper>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ClearImage()">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

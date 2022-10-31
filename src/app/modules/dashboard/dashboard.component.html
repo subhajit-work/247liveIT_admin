@@ -1,0 +1,81 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-0">
+        <div class="col-sm-6">
+          <!-- <h1>General Form</h1> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="d-flex justify-content-between">
+                <h3 class="card-title">Earnings</h3>
+                <select class="custom-select" style="width: fit-content;" (change)="GetChartEarnings($event)">
+                  <option value="1">Daily</option>
+                  <option value="2">Weekly</option>
+                  <option value="3">Monthly</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="position-relative mb-4">
+                <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <h3 class="card-title">Subscription Details</h3>
+              <div class="card-tools">
+                <a href="javascript:void(0)" class="btn btn-tool" title="Export as PDF file" (click)="ExportSubscription(1)">
+                  <i class="fas fa-file-pdf fa-2x"></i>
+                </a>
+              </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-striped table-valign-middle">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Email</th>
+                    <th>Amount</th>
+                    <th>Subscription Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subscription of subscriptions | paginate: { itemsPerPage: perPage, currentPage: pageIndex, totalItems: subscriptionCount }; let i = index">
+                  <td><img width="50" height="50" [src]="subscription?.image" onerror="this.src='./assets/img/app_logo.png';" class="img-fluid rounded-circle"></td>
+                  <td>{{subscription.email}}</td>
+                  <td>{{subscription.amount | currency}}</td>
+                  <td>{{subscription?.createdAt | date}}</td>
+                </tr>
+                </tbody>
+              </table>
+              <div *ngIf="subscriptions.length == 0">
+                <p class="text-center">Subscription list not found</p>
+              </div>
+            </div>
+            <div class="custom_pagination mt-4" *ngIf="subscriptions?.length > 0">
+              <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

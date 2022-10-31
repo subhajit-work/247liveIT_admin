@@ -1,0 +1,237 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-6">
+            <!-- <h1>General Form</h1> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+                <form [formGroup]="UserEditForm" novalidate class="card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Google Analytics Details</h3>
+                    </div>
+                    <!-- <input type="hidden" formControlName="user_id"> -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Account</label>
+                                <input type="text" class="form-control" placeholder="Google Analytics Account" formControlName="account_id">
+                            </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Properties</label>
+                                <input type="text" class="form-control" placeholder="Google Analytics Properties" formControlName="properties_id">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>View ID</label>
+                                <input type="text" class="form-control" placeholder="Google Analytics View ID" formControlName="view_id">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Google Ad's Details</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Client Id</label>
+                                <input type="text" class="form-control" placeholder="Client Id" formControlName="client_id">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Client Secret</label>
+                                <input type="text" class="form-control" placeholder="Client Secret" formControlName="client_secret">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Developer Token</label>
+                                <input type="text" class="form-control" placeholder="Developer Token" formControlName="developer_token">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group">
+                              <label>Customer Id</label>
+                              <input type="text" class="form-control" placeholder="Customer Id" formControlName="customer_id">
+                              </div>
+                          </div><div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Login Customer Id</label>
+                                <input type="text" class="form-control" placeholder="Login Customer Id" formControlName="login_customer_id">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Refresh Token</label>
+                                <input type="text" class="form-control" placeholder="Refresh Token" formControlName="refresh_token">
+                            </div>
+                          </div>
+
+                      </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Facebook Account Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>App ID</label>
+                                <input type="text" class="form-control" placeholder="Facebook App ID" formControlName="fapp_id">
+                            </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>App Secret</label>
+                                <input type="text" class="form-control" placeholder="Facebook App Secret" formControlName="fappsecret_id">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Access Token</label>
+                                <input type="text" class="form-control" placeholder="Facebook Access Token" formControlName="faccesstoken_id">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                              <label>Business Id</label>
+                              <input type="text" class="form-control" placeholder="Facebook Business Id" formControlName="business_id">
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                              <label>Ad Manager Id</label>
+                              <input type="text" class="form-control" placeholder="Facebook Ad Manager Id" formControlName="adsmanager_id">
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                      <h3 class="card-title">Call Tracking Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>User Name</label>
+                                <input type="text" class="form-control" placeholder="Call tracking matrix id" formControlName="ctm_user">
+                            </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" class="form-control" placeholder="Call tracking matrix password" formControlName="ctm_password">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label>Account Id</label>
+                                <input type="text" class="form-control" placeholder="Call tracking account id" formControlName="ctm_account_id">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary" (click)="addUserAccountDtls(UserEditForm.value)">Submit</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+                <form [formGroup]="SocialReportEditForm" novalidate class="card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Monthly Social report</h3>
+                    </div>
+                    <!-- <input type="hidden" formControlName="user_id"> -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                  <label>Social Report Name</label>
+                                  <input type="text" class="form-control" placeholder="Social report name" formControlName="name">
+                                  <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && SocialReportEditForm.controls.name.hasError('required')">Kindly Enter Social Report Name</span>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label>For Month</label>
+                                <select class="custom-select" formControlName="month">
+                                  <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                                </select>
+                                <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isPackageSubmit && SocialReportEditForm.controls.month.hasError('required')">Kindly Select Month</span>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label>Social Report file</label><br />
+                                <div class="image-upload">
+                                  <div>
+                                    <i style="font-size: 30px;margin-bottom: 10px;color: #087afc;" *ngIf="imageSrc" class="nav-icon fas fa-file-alt"></i>
+                                  </div>
+                                  <input name="imageUrl" type="file" accept=".pdf,.doc,.docx" (change)="handleInputChange($event)" />
+                                </div> 
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary" (click)="addSocialReport(SocialReportEditForm.value)">Submit</button>
+              </div>
+            </div>
+
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Monthly Social report lists</h3>
+                <div class="card-tools">
+                  
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Sr.</th>
+                      <th>Name</th>
+                      <th>Month</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let item of package; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>{{item?.document_name}}</td>
+                      <td>{{item?.month}}</td>
+                      <td>
+                        <a href="javascript:void(0)" (click)="goToLink(item.id)" title="Inactive User"><i class="fas fa-download text-info"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="package.length == 0">
+                  <p class="text-center">No record found</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

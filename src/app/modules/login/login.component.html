@@ -1,0 +1,82 @@
+<div class="login-page">
+  <div class="login-box">
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="javascript:void(0)" class="h1"><b>247LiveIt</b></a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form [formGroup]="LoginForm" novalidate>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email" formControlName="email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isLoginSubmit && LoginForm.controls.email.hasError('required')">Kindly enter a email</span>
+            <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isLoginSubmit && LoginForm.controls.email.hasError('email') && !LoginForm.controls.email.hasError('required')">Kindly enter valid email</span>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input [type]="pwdLockFlag ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password">
+              <div class="input-group-append">
+                <div class="input-group-text" (click)="ShowHidePassword()">
+                  <span class="fas fa-lock" *ngIf="pwdLockFlag === false"></span>
+                  <span class="fas fa-unlock" *ngIf="pwdLockFlag"></span>
+                </div>
+              </div>
+            </div>
+            <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isLoginSubmit && LoginForm.controls.password.hasError('required')">Kindly enter a password</span>
+          </div>
+          <div class="row">
+            <div class="col-8 mt-3">
+              <a href="javascript:void(0)" data-toggle="modal" data-target="#forgotPwdModal">I forgot my password</a>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btn btn-primary btn-block" (click)="Login(LoginForm.value)">Sign In</button>
+            </div>
+            <!-- <div class="col-8">
+              <button type="submit" class="btn btn-primary btn-block">Register new account</button>
+            </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="forgotPwdModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Forgot Password</h4>
+      </div>
+      <div class="modal-body text-center">
+        <i class="fas fa-lock fa-7x"></i>
+        <p>You can reset your password here</p>
+        <form [formGroup]="ForgotPasswordForm" novalidate>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email" formControlName="email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isForgotPasswordSubmit && ForgotPasswordForm.controls.email.hasError('required')">Kindly enter an email</span>
+            <span class="errorMsg" style="margin-top: 0px !important;" *ngIf="isForgotPasswordSubmit && ForgotPasswordForm.controls.email.hasError('email') && !ForgotPasswordForm.controls.email.hasError('required')">Kindly enter valid email</span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeForgotPasswordModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="ForgotPassword(ForgotPasswordForm.value)">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
